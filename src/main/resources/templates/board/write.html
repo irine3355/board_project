@@ -2,12 +2,12 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>게시판 쓰기</title>
+    <title>게시판 등록</title>
     <link rel="stylesheet" th:href="@{/css/board/write.css}" />
 </head>
 <body>
 <div class="container">
-    <h1>게시판 쓰기</h1>
+    <h1>게시판 등록</h1>
     <form name="frmRegist" method="post" autocomplete="off" th:object="${requestBoard}" th:action="@{/board/write}" class="form-container">
         <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
 
