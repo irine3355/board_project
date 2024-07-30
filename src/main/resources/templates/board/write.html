@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 쓰기</title>
+    <link rel="stylesheet" th:href="@{/css/board/write.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>게시판 쓰기</h1>
+    <form name="frmRegist" method="post" autocomplete="off" th:object="${requestBoard}" th:action="@{/board/write}" class="form-container">
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+
+        <dl>
+            <dt th:text="#{작성자}">
+                title
+            </dt>
+            <dd>
+                <input type="text" name="userName" th:field="*{userName}" class="form-input">
+                <div class="error" th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{제목}">
+                title
+            </dt>
+            <dd>
+                <input type="text" name="subject" th:field="*{subject}" class="form-input">
+                <div class="error" th:each="err : ${#fields.errors('subject')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <dl>
+            <dt th:text="#{내용}">
+                content
+            </dt>
+            <dd>
+                <textarea type="text" name="content" th:field="*{content}" class="form-textarea"></textarea>
+                <div class="error" th:each="err : ${#fields.errors('content')}" th:text="${err}"></div>
+            </dd>
+        </dl>
+        <button type="submit" class="btn btn-primary">등록 하기</button>
+    </form>
+</div>
+</body>
+</html>

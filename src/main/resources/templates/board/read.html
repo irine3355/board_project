@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 읽기</title>
+    <link rel="stylesheet" th:href="@{/css/board/read.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>게시판 읽기</h1>
+    <form method="get" th:action="@{/board/write}" class="form-inline">
+        <button type="submit" class="btn btn-primary">글쓰러 가기</button>
+    </form>
+    <table class="styled-table">
+        <thead>
+        <tr>
+            <th>순번</th>
+            <th>제목</th>
+            <th>작업</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item, s : ${items}" th:object="${item}" class="item" th:id="board+${s.index}">
+            <td th:text="${s.index + 1}"></td>
+            <td th:text="${item.subject}"></td>
+
+            <td>
+                <!-- 수정하기 버튼 -->
+                <form th:action="@{/board/update/{seq}(seq=${item.seq})}" method="get" class="form-inline">
+                    <button type="submit" class="btn btn-warning">수정하기</button>
+                </form>
+
+                <!-- 삭제하기 버튼 -->
+                <form th:action="@{/board/delete/{seq}(seq=${item.seq})}" method="post" class="form-inline">
+                    <input type="hidden" name="_method" value="delete" />
+                    <button type="submit" class="btn btn-danger">삭제하기</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

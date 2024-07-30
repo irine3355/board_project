@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시판 수정</title>
+    <link rel="stylesheet" th:href="@{/css/board/update.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>게시판 수정</h1>
+    <form th:action="@{/board/update/{seq}(seq=${requestBoard.seq})}" th:object="${requestBoard}" method="post" class="form-container">
+        <div class="error global" th:each="err : ${#fields.globalErrors()}" th:text="${err}"></div>
+        <!-- Hidden field to store the 'seq' value -->
+        <input type="hidden" th:field="*{seq}" />
+
+        <!-- Form group for userName -->
+        <div class="form-group">
+            <label for="userName">작성자:</label>
+            <input type="text" id="userName" th:field="*{userName}" class="form-input"/>
+            <div class="error" th:each="err : ${#fields.errors('userName')}" th:text="${err}"></div>
+        </div>
+
+        <!-- Form group for subject -->
+        <div class="form-group">
+            <label for="subject">제목:</label>
+            <input type="text" id="subject" th:field="*{subject}" class="form-input"/>
+            <div class="error" th:each="err : ${#fields.errors('subject')}" th:text="${err}"></div>
+        </div>
+
+        <!-- Form group for content -->
+        <div class="form-group">
+            <label for="content">내용:</label>
+            <textarea id="content" th:field="*{content}" class="form-textarea"></textarea>
+            <div class="error" th:each="err : ${#fields.errors('content')}" th:text="${err}"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">수정하기</button>
+    </form>
+</div>
+</body>
+</html>
